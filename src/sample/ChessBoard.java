@@ -56,13 +56,13 @@ public class ChessBoard extends Application {
             drawBoard(gc, getWidth(), getHeight(), insetSize);
         }
 
-        private void drawBoard(GraphicsContext gc, double canvasWidth, double canvasHeight, double inset) {
+        private void drawBoard(GraphicsContext gc, double canvasWidth, double canvasHeight, double padding) {
             double minSize = Math.min(canvasWidth, canvasHeight);
-            double width = minSize - inset * 2;
-            double height = minSize - inset * 2;
+            double width = minSize - padding * 2;
+            double height = minSize - padding * 2;
             double square =  width / 8;
-            double leftMargin = (canvasWidth - (square * 8)) / 2;
-            double topMargin = (canvasHeight - (square * 8)) / 2;
+            double paddingX = (canvasWidth - (square * 8)) / 2;
+            double paddingY = (canvasHeight - (square * 8)) / 2;
             Color[] colors = {Color.LIGHTGRAY, Color.BLUE};
 
             // Clear the canvas first
@@ -71,14 +71,14 @@ public class ChessBoard extends Application {
 
             // Draw a border outline of board.
             gc.setFill(Color.BLACK);
-            gc.strokeRect(leftMargin, topMargin, width, height);
+            gc.strokeRect(paddingX, paddingY, width, height);
 
             // Draw the 64 square board with alternate colors. First top left square should be light color
             for (int row = 0; row < 8; row ++) {
-                double colHeight = topMargin + (square * row);
+                double colHeight = paddingY + (square * row);
                 for (int col = 0; col < 8; col++) {
                     gc.setFill(colors[(col + (row % 2)) % 2]); // Alternate start color on each row
-                    gc.fillRect(leftMargin + col * square, colHeight, square, square);
+                    gc.fillRect(paddingX + col * square, colHeight, square, square);
                 }
             }
         }
