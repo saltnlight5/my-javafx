@@ -51,11 +51,11 @@ public class ChessBoard extends Application {
         }
 
         public void draw() {
-            double squareSize = getWidth() / (8 + (1/3)); // We want inset = 1/3 of square size
-            double insetSize = squareSize / 3;
+            double squareSize = getWidth() / (8 + (1/3)); // We want padding = 1/3 of square size
+            double padding = squareSize / 3;
 
             GraphicsContext gc = getGraphicsContext2D();
-            drawBoard(gc, getWidth(), getHeight(), insetSize);
+            drawBoard(gc, getWidth(), getHeight(), padding);
         }
 
         private void drawBoard(GraphicsContext gc, double canvasWidth, double canvasHeight, double padding) {
