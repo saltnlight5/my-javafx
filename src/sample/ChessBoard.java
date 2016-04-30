@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -8,6 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -57,10 +59,10 @@ public class ChessBoard extends Application {
         }
 
         private void drawBoard(GraphicsContext gc, double canvasWidth, double canvasHeight, double padding) {
-            double minSize = Math.min(canvasWidth, canvasHeight);
-            double width = minSize - padding * 2;
-            double height = minSize - padding * 2;
-            double square =  width / 8;
+            double smallerSide = Math.min(canvasWidth, canvasHeight);
+            double boardWidth = smallerSide - padding * 2;
+            double boardHeight = smallerSide - padding * 2;
+            double square =  boardWidth / 8;
             double paddingX = (canvasWidth - (square * 8)) / 2;
             double paddingY = (canvasHeight - (square * 8)) / 2;
             Color[] colors = {Color.LIGHTGRAY, Color.BLUE};
@@ -71,7 +73,22 @@ public class ChessBoard extends Application {
 
             // Draw a border outline of board.
             gc.setFill(Color.BLACK);
-            gc.strokeRect(paddingX, paddingY, width, height);
+            gc.strokeRect(paddingX, paddingY, boardWidth, boardHeight);
+
+            // Draw the board coordinates, it should stick to the side of the board even when board is resized.
+            gc.setTextAlign(TextAlignment.CENTER);
+            gc.setTextBaseline(VPos.CENTER);
+            double coordCenter = square / 2;
+            double coordX = paddingX - 10;
+            for (int i = 0; i < 8; i++) {
+                gc.fillText(Integer.toString(8 - i),  coordX, paddingY + (i * square) + coordCenter);
+            }
+
+            double coordY = paddingY + boardHeight + 10;
+            for (int i = 0; i < 8; i++) {
+                // ASCII 65 => 'A'
+                gc.fillText(Character.toString((char)(65 +  i)),  paddingX + (i * square) + coordCenter, coordY);
+            }
 
             // Draw the 64 square board with alternate colors. First top left square should be light color
             for (int row = 0; row < 8; row ++) {
