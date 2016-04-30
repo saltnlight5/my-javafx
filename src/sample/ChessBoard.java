@@ -77,7 +77,7 @@ public class ChessBoard extends Application {
             gc.strokeRect(paddingX, paddingY, boardWidth, boardHeight);
 
             // Draw the board coordinates, it should stick to the side of the board even when board is resized.
-            gc.setFont(Font.font("Courier New", 12));
+            gc.setFont(Font.font("Courier New", square * 0.25));
             gc.setTextAlign(TextAlignment.CENTER);
             gc.setTextBaseline(VPos.CENTER);
             double coordCenter = square / 2;
