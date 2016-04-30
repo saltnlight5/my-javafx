@@ -9,6 +9,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
@@ -76,6 +77,7 @@ public class ChessBoard extends Application {
             gc.strokeRect(paddingX, paddingY, boardWidth, boardHeight);
 
             // Draw the board coordinates, it should stick to the side of the board even when board is resized.
+            gc.setFont(Font.font("Courier New", 12));
             gc.setTextAlign(TextAlignment.CENTER);
             gc.setTextBaseline(VPos.CENTER);
             double coordCenter = square / 2;
@@ -97,6 +99,49 @@ public class ChessBoard extends Application {
                     gc.setFill(colors[(col + (row % 2)) % 2]); // Alternate start color on each row
                     gc.fillRect(paddingX + col * square, colHeight, square, square);
                 }
+            }
+
+            // Draw chess pieces using Unicode
+            String blackPawn = Character.toString((char) 0x265F);
+            String blackRook = Character.toString((char) 0x265C);
+            String blackKnight = Character.toString((char) 0x265E);
+            String blackBishop = Character.toString((char) 0x265D);
+            String blackQueen = Character.toString((char) 0x265B);
+            String blackKing = Character.toString((char) 0x265A);
+            String whitePawn = Character.toString((char) 0x2659);
+            String whiteRook = Character.toString((char) 0x2656);
+            String whiteKnight = Character.toString((char) 0x2658);
+            String whiteBishop = Character.toString((char) 0x2657);
+            String whiteQueen = Character.toString((char) 0x2655);
+            String whiteKing = Character.toString((char) 0x2654);
+
+            gc.setFont(Font.font("Courier New", square * 0.75));
+            gc.setFill(Color.BLACK);
+
+            // Draw Black Pieces
+            gc.fillText(blackRook, paddingX + (0 * square) + (square / 2), paddingY + (square / 2));
+            gc.fillText(blackKnight, paddingX + (1 * square) + (square / 2), paddingY + (square / 2));
+            gc.fillText(blackBishop, paddingX + (2 * square) + (square / 2), paddingY + (square / 2));
+            gc.fillText(blackQueen, paddingX + (3 * square) + (square / 2), paddingY + (square / 2));
+            gc.fillText(blackKing, paddingX + (4 * square) + (square / 2), paddingY + (square / 2));
+            gc.fillText(blackBishop, paddingX + (5 * square) + (square / 2), paddingY + (square / 2));
+            gc.fillText(blackKnight, paddingX + (6 * square) + (square / 2), paddingY + (square / 2));
+            gc.fillText(blackRook, paddingX + (7 * square) + (square / 2), paddingY + (square / 2));
+            for (int i = 0; i < 8; i++) {
+                gc.fillText(blackPawn, paddingX + (i * square) + (square / 2), paddingY + square + (square / 2));
+            }
+
+            // Draw White Pieces
+            gc.fillText(whiteRook, paddingX + (0 * square) + (square / 2), paddingY + (7 * square) + (square / 2));
+            gc.fillText(whiteKnight, paddingX + (1 * square) + (square / 2), paddingY + (7 * square) + (square / 2));
+            gc.fillText(whiteBishop, paddingX + (2 * square) + (square / 2), paddingY + (7 * square) + (square / 2));
+            gc.fillText(whiteQueen, paddingX + (3 * square) + (square / 2), paddingY + (7 * square) + (square / 2));
+            gc.fillText(whiteKing, paddingX + (4 * square) + (square / 2), paddingY + (7 * square) + (square / 2));
+            gc.fillText(whiteBishop, paddingX + (5 * square) + (square / 2), paddingY + (7 * square) + (square / 2));
+            gc.fillText(whiteKnight, paddingX + (6 * square) + (square / 2), paddingY + (7 * square) + (square / 2));
+            gc.fillText(whiteRook, paddingX + (7 * square) + (square / 2), paddingY + (7 * square) + (square / 2));
+            for (int i = 0; i < 8; i++) {
+                gc.fillText(whitePawn, paddingX + (i * square) + (square / 2), paddingY + (6 * square) + (square / 2));
             }
         }
 
