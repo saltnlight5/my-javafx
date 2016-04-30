@@ -61,7 +61,7 @@ public class ChessBoard extends Application {
         private void drawBoard(GraphicsContext gc, double canvasWidth, double canvasHeight, double padding) {
             double smallerSide = Math.min(canvasWidth, canvasHeight);
             double boardWidth = smallerSide - padding * 2;
-            double boardHeight = smallerSide - padding * 2;
+            double boardHeight = boardWidth;
             double square =  boardWidth / 8;
             double paddingX = (canvasWidth - (square * 8)) / 2;
             double paddingY = (canvasHeight - (square * 8)) / 2;
